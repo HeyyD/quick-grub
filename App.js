@@ -9,8 +9,7 @@
 import React, {Component} from 'react';
 import RecipeList from './components/RecipeList';
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
   render() {
     return (
       <RecipeList />
