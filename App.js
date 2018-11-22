@@ -7,12 +7,17 @@
  */
 
 import React, {Component} from 'react';
+import { View } from 'react-native';
 import RecipeList from './components/RecipeList';
+import Search from './components/Search';
 
 export default class App extends Component {
   render() {
     return (
-      <RecipeList />
+      <View>
+        <Search />
+        <RecipeList />
+      </View>
     );
   }
 }
