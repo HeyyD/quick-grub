@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
+import RecipeButton from './RecipeButton';
 
 export default class RecipeList extends Component {
   constructor(props) {
@@ -24,7 +25,13 @@ export default class RecipeList extends Component {
   render() {
     return (
       <View >
-        {this.state.recipes.map((recipe, index) => <Text key={index}>{recipe.label}</Text>)}
+        {
+          this.state.recipes.map((recipe, index) => <RecipeButton
+            key={index}
+            label={recipe.label}
+            img={recipe.image}
+           />)
+        }
       </View>
     );
   }
