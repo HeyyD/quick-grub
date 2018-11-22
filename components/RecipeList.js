@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import RecipeButton from './RecipeButton';
 
+import styles from './RecipeList.scss';
+
 export default class RecipeList extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +26,7 @@ export default class RecipeList extends Component {
 
   render() {
     return (
-      <View >
+      <View style={styles['recipe-list-container']}>
         {
           this.state.recipes.map((recipe, index) => <RecipeButton
             key={index}
