@@ -1,0 +1,30 @@
+.recipe-button{
+  position: relative;
+
+  &-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  &-overlay {
+    @extend .recipe-button-image;
+    background: #000;
+    opacity: 0.7;
+  }
+
+  &-text-container {
+    @extend .recipe-button-image;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+  }
+
+  &-text {
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+  }
+}
