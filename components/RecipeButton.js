@@ -11,10 +11,10 @@ export default class RecipeButton extends Component {
 
     return (
       <TouchableOpacity style={{...styles['recipe-button'], height: size, width: size}}>
-        <Image style={styles['recipe-button-image']} source={{uri: this.props.img}} />
+        <Image style={styles['recipe-button-image']} source={{uri: this.props.data.image}} />
         <View style={styles['recipe-button-overlay']}></View>
         <View style={styles['recipe-button-text-container']}>
-          <Text style={styles['recipe-button-text']}>{this.props.label}</Text>
+          <Text style={styles['recipe-button-text']}>{this.props.data.label}</Text>
         </View>
       </TouchableOpacity>
     );

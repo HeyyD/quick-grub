@@ -26,7 +26,7 @@ export default class RecipeList extends Component {
     return (
       <FlatList numColumns={3}
         data={this.state.recipes}
-        renderItem={({item}) => <RecipeButton label={item.label} img={item.image} /> }
+        renderItem={({item}) => <RecipeButton data={item} /> }
         keyExtractor={(item, index) => index.toString()}
       >
       </FlatList>
