@@ -1,7 +1,5 @@
-.recipe-button-container {
+.recipe-button{
   position: relative;
-  height: 100px;
-  width: 100px;
 
   &-image {
     position: absolute;
@@ -11,9 +9,22 @@
     width: 100%;
   }
 
+  &-overlay {
+    @extend .recipe-button-image;
+    background: #000;
+    opacity: 0.7;
+  }
+
+  &-text-container {
+    @extend .recipe-button-image;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+  }
+
   &-text {
-    position: absolute;
-    top: 0;
-    right: 0;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
   }
 }
