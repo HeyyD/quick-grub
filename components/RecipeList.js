@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import { FlatList } from 'react-native';
 import RecipeButton from './RecipeButton';
-
-import styles from './RecipeList.scss';
 
 export default class RecipeList extends Component {
   constructor(props) {
@@ -15,7 +13,7 @@ export default class RecipeList extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://api.edamam.com/search?q=chicken&app_id=${this.state.APP_ID}&app_key=${this.state.APP_KEY}&calories=591-722&health=alcohol-free`)
+    fetch(`https://api.edamam.com/search?q=chicken&app_id=${this.state.APP_ID}&app_key=${this.state.APP_KEY}&from=0&to=100&calories=591-722&health=alcohol-free`)
     .then(res => res.json())
     .then(res => {
       const recipes = res.hits.map(hit => hit.recipe);
@@ -26,15 +24,12 @@ export default class RecipeList extends Component {
 
   render() {
     return (
-      <View style={styles['recipe-list-container']}>
-        {
-          this.state.recipes.map((recipe, index) => <RecipeButton
-            key={index}
-            label={recipe.label}
-            img={recipe.image}
-           />)
-        }
-      </View>
+      <FlatList numColumns={3}
+        data={this.state.recipes}
+        renderItem={({item}) => <RecipeButton label={item.label} img={item.image} /> }
+        keyExtractor={(item, index) => index.toString()}
+      >
+      </FlatList>
     );
   }
 }
