@@ -7,16 +7,9 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 
 import styles from './App.scss'
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -25,7 +18,8 @@ export default class App extends Component<Props> {
     super(props);
     this.state = {
       APP_ID: '685bcca3',
-      APP_KEY: '2e9706babb21c1594844fe1f2d45113b'
+      APP_KEY: '2e9706babb21c1594844fe1f2d45113b',
+      recipes: []
     };
   }
 
@@ -33,16 +27,16 @@ export default class App extends Component<Props> {
     fetch(`https://api.edamam.com/search?q=chicken&app_id=${this.state.APP_ID}&app_key=${this.state.APP_KEY}&calories=591-722&health=alcohol-free`)
     .then(res => res.json())
     .then(res => {
-      res.hits.forEach(hit => {
-        console.log(hit.recipe);
-      })
+      const recipes = res.hits.map(hit => hit.recipe);
+      console.log(recipes);
+      this.setState({recipes: recipes});
     });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>APP IS WORKING</Text>
+        {this.state.recipes.map((recipe, index) => <Text key={index}>{recipe.label}</Text>)}
       </View>
     );
   }
