@@ -40,6 +40,10 @@ const dietLabels = {
 
 export default class Search extends Component {
 
+  static navigationOptions = {
+    title: 'Search'
+  }
+
   constructor(props) {
     super(props);
     this.onPickerChange = this.onPickerChange.bind(this);

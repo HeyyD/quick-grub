@@ -3,6 +3,11 @@ import { FlatList } from 'react-native';
 import RecipeButton from './RecipeButton';
 
 export default class RecipeList extends Component {
+
+  static navigationOptions = {
+    title: 'Recipe list'
+  }
+
   constructor(props) {
     super(props);
     this.state = {
