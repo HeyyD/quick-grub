@@ -39,12 +39,35 @@ const dietLabels = {
 }
 
 export default class Search extends Component {
+
+  constructor(props) {
+    super(props);
+    this.onPickerChange = this.onPickerChange.bind(this);
+    this.onSearchChange = this.onSearchChange.bind(this);
+
+    this.state = {
+      searchValue: '',
+      pickedItem: 'None',
+    }
+  }
+
+  onSearchChange(value) {
+    this.setState( {searchValue: value} );
+  }
+
+  onPickerChange(item) {
+    this.setState({ pickedItem: item });
+  }
+
   render() {
     return(
       <View>
-        <TextInput placeholder='Find a recipe' />
+        <TextInput placeholder='Find a recipe' onChangeText={ (value) => this.onSearchChange(value) } />
         <Text>Pick label</Text>
-        <Picker>
+        <Picker
+          onValueChange={ (item) => this.onPickerChange(item) }
+          selectedValue={ this.state.pickedItem }
+        >
           {
             Object.keys(dietLabels).map(key => {
               return (
