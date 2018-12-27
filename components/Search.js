@@ -84,7 +84,7 @@ export default class Search extends Component {
             })
           }
         </Picker>
-        <Button title='Search' onPress={() => console.log('Search')} />
+        <Button title='Search' onPress={() => this.props.navigation.navigate('recipeList', { searchValue: this.state.searchValue })} />
       </View>
     );
   }

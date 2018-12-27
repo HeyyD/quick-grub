@@ -10,15 +10,19 @@ export default class RecipeList extends Component {
 
   constructor(props) {
     super(props);
+    const searchProps = this.props.navigation.state.params;
+    console.log(searchProps);
+
     this.state = {
       APP_ID: '685bcca3',
       APP_KEY: '2e9706babb21c1594844fe1f2d45113b',
+      searchInfo: searchProps,
       recipes: []
     };
   }
 
   componentDidMount() {
-    fetch(`https://api.edamam.com/search?q=chicken&app_id=${this.state.APP_ID}&app_key=${this.state.APP_KEY}&from=0&to=100&calories=591-722&health=alcohol-free`)
+    fetch(`https://api.edamam.com/search?q=${this.state.searchInfo.searchValue}&app_id=${this.state.APP_ID}&app_key=${this.state.APP_KEY}&from=0&to=100`)
     .then(res => res.json())
     .then(res => {
       const recipes = res.hits.map(hit => hit.recipe);
