@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TextInput, View, Picker } from 'react-native';
+import { Text, TextInput, View, Picker, Button } from 'react-native';
 
 const dietLabels = {
   None: null,
@@ -80,6 +80,7 @@ export default class Search extends Component {
             })
           }
         </Picker>
+        <Button title='Search' onPress={() => console.log('Search')} />
       </View>
     );
   }
