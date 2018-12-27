@@ -22,7 +22,7 @@ export default class RecipeList extends Component {
   }
 
   componentDidMount() {
-    let url = `https://api.edamam.com/search?q=${this.state.searchInfo.searchValue}&app_id=${this.state.APP_ID}&app_key=${this.state.APP_KEY}&from=0&to=100`
+    let url = `https://api.edamam.com/search?q=${this.state.searchInfo.searchValue}&app_id=${this.state.APP_ID}&app_key=${this.state.APP_KEY}&from=0&to=90`
 
     if (this.state.searchInfo.dietLabel) {
       url += `&health=${this.state.searchInfo.dietLabel}`;
