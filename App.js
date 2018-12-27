@@ -16,7 +16,6 @@ export default class App extends Component {
     return (
       <View>
         <Search />
-        <RecipeList />
       </View>
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, TextInput, View, Picker } from 'react-native';
 
 const dietLabels = {
+  None: null,
   Balanced: 'balanced',
   High_Fiber: 'high-fiber',
   High_Protein: 'high-protein',
@@ -42,11 +43,13 @@ export default class Search extends Component {
     return(
       <View>
         <TextInput placeholder='Find a recipe' />
+        <Text>Pick label</Text>
         <Picker>
           {
             Object.keys(dietLabels).map(key => {
               return (
-                <Picker.Item 
+                <Picker.Item
+                  key={key}
                   label={key.split('_').join(' ')} 
                   value={dietLabels[key]}
                 />
