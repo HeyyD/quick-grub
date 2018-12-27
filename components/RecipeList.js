@@ -22,7 +22,14 @@ export default class RecipeList extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://api.edamam.com/search?q=${this.state.searchInfo.searchValue}&app_id=${this.state.APP_ID}&app_key=${this.state.APP_KEY}&from=0&to=100`)
+
+    let url = `https://api.edamam.com/search?q=${this.state.searchInfo.searchValue}&app_id=${this.state.APP_ID}&app_key=${this.state.APP_KEY}&from=0&to=100`
+
+    if (this.state.searchInfo.dietLabel) {
+      url += `&health=${this.state.searchInfo.dietLabel}`;
+    }
+
+    fetch(url)
     .then(res => res.json())
     .then(res => {
       const recipes = res.hits.map(hit => hit.recipe);
@@ -33,7 +40,8 @@ export default class RecipeList extends Component {
 
   render() {
     return (
-      <FlatList numColumns={3}
+      <FlatList 
+        numColumns={3}
         data={this.state.recipes}
         renderItem={({item}) => <RecipeButton data={item} /> }
         keyExtractor={(item, index) => index.toString()}

@@ -3,12 +3,6 @@ import { Text, TextInput, View, Picker, Button } from 'react-native';
 
 const dietLabels = {
   None: null,
-  Balanced: 'balanced',
-  High_Fiber: 'high-fiber',
-  High_Protein: 'high-protein',
-  Low_Carb: 'low-carb',
-  Low_Fat: 'low-fat',
-  Low_Sodium: 'low-sodium',
   Alcohol_free: 'alcohol-free',
   Celery_free: 'celery-free',
   Crustacean_free: 'crustacean-free',
@@ -51,7 +45,7 @@ export default class Search extends Component {
 
     this.state = {
       searchValue: '',
-      pickedItem: 'None',
+      pickedItem: null,
     }
   }
 
@@ -84,7 +78,13 @@ export default class Search extends Component {
             })
           }
         </Picker>
-        <Button title='Search' onPress={() => this.props.navigation.navigate('recipeList', { searchValue: this.state.searchValue })} />
+        <Button 
+          title='Search'
+          onPress={() => this.props.navigation.navigate('recipeList', { 
+            searchValue: this.state.searchValue,
+            dietLabel: this.state.pickedItem
+          })}
+        />
       </View>
     );
   }
