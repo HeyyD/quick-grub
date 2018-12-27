@@ -1,19 +1,12 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
-import React, {Component} from 'react';
+import{ createStackNavigator, createAppContainer } from 'react-navigation';
 import RecipeList from './components/RecipeList';
+import Search from './components/Search';
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <RecipeList />
-    );
-  }
-}
+const stackNavigation = createStackNavigator({
+  search: { screen: Search },
+  recipeList: { screen: RecipeList }
+});
+
+const App = createAppContainer(stackNavigation);
+
+export default App;

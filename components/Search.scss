@@ -1,0 +1,18 @@
+.search {
+  display: flex;
+  height: 100%;
+
+  &-input {
+    margin: 10px;
+    flex: 1 0 auto;
+
+    &-label {
+      padding-left: 10px;
+    }
+  }
+
+  &-button-container {
+    align-self: flex-end;
+    margin: 20px auto;
+  }
+}
