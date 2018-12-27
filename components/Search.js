@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Text, TextInput, View, Picker, Button } from 'react-native';
 
+import styles from './Search.scss';
+
 const dietLabels = {
   None: null,
   Alcohol_free: 'alcohol-free',
@@ -59,32 +61,36 @@ export default class Search extends Component {
 
   render() {
     return(
-      <View>
-        <TextInput placeholder='Find a recipe' onChangeText={ (value) => this.onSearchChange(value) } />
-        <Text>Pick label</Text>
-        <Picker
-          onValueChange={ (item) => this.onPickerChange(item) }
-          selectedValue={ this.state.pickedItem }
-        >
-          {
-            Object.keys(dietLabels).map(key => {
-              return (
-                <Picker.Item
-                  key={key}
-                  label={key.split('_').join(' ')} 
-                  value={dietLabels[key]}
-                />
-              );
-            })
-          }
-        </Picker>
-        <Button 
-          title='Search'
-          onPress={() => this.props.navigation.navigate('recipeList', { 
-            searchValue: this.state.searchValue,
-            dietLabel: this.state.pickedItem
-          })}
-        />
+      <View style={styles['search']}>
+        <View style={styles['search-input']}>
+          <TextInput placeholder='Find a recipe' onChangeText={ (value) => this.onSearchChange(value) } />
+          <Text style={styles['search-input-label']}>Pick label</Text>
+          <Picker
+            onValueChange={ (item) => this.onPickerChange(item) }
+            selectedValue={ this.state.pickedItem }
+          >
+            {
+              Object.keys(dietLabels).map(key => {
+                return (
+                  <Picker.Item
+                    key={key}
+                    label={key.split('_').join(' ')} 
+                    value={dietLabels[key]}
+                  />
+                );
+              })
+            }
+          </Picker>
+        </View>
+        <View style={styles['search-button-container']}>
+          <Button
+            title='Search'
+            onPress={() => this.props.navigation.navigate('recipeList', { 
+              searchValue: this.state.searchValue,
+              dietLabel: this.state.pickedItem
+            })}
+          />
+        </View>
       </View>
     );
   }
