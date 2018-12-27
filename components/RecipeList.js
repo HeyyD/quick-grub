@@ -33,6 +33,10 @@ export default class RecipeList extends Component {
     .then(res => {
       const recipes = res.hits.map(hit => hit.recipe);
       this.setState({recipes: recipes, isLoading: false});
+    })
+    .catch(error => {
+      console.log(error);
+      this.setState({isLoading: false});
     });
   }
 
