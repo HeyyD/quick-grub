@@ -4,9 +4,9 @@ import Search from './components/Search';
 import RecipePage from './components/RecipePage';
 
 const stackNavigation = createStackNavigator({
-  // search: { screen: Search },
-  recipePage: { screen: RecipePage },
-  recipeList: { screen: RecipeList }
+  search: { screen: Search },
+  recipeList: { screen: RecipeList },
+  recipePage: { screen: RecipePage }
 });
 
 const App = createAppContainer(stackNavigation);

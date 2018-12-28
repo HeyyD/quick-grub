@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, Image, View, Button, Linking } from 'react-native';
 import styles from './RecipePage.scss';
-import data from './tempData.json';
 
 export default class RecipePage extends Component {
 
@@ -13,9 +12,7 @@ export default class RecipePage extends Component {
 
   constructor(props) {
     super(props);
-    // const data = this.props.navigation.state.params.data;
-    console.log(data);
-    this.data = data;
+    this.data = this.props.navigation.state.params.data;
   }
 
   render() {
@@ -34,7 +31,9 @@ export default class RecipePage extends Component {
               })
             }
           </View>
-          <Button style={styles['recipe-content-link']} title='Go to recipe' onPress={() => Linking.openURL(this.data.url)} />
+          <View style={styles['recipe-content-link']}>
+            <Button title='Go to recipe' onPress={() => Linking.openURL(this.data.url)} />
+          </View>
         </View>
       </View>
     );
