@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Image, View } from 'react-native';
+import { Text, Image, View, Button, Linking } from 'react-native';
 import styles from './RecipePage.scss';
 import data from './tempData.json';
 
@@ -30,10 +30,11 @@ export default class RecipePage extends Component {
           <View style={styles['recipe-ingredients']}>
             {
               this.data.ingredientLines.map((line, index) => {
-                return <Text style={styles['recipe-ingredients-line']} key={index}>{line}</Text>;
+                return <Text style={styles['recipe-ingredients-line']} key={index}>- {line}</Text>;
               })
             }
           </View>
+          <Button style={styles['recipe-content-link']} title='Go to recipe' onPress={() => Linking.openURL(this.data.url)} />
         </View>
       </View>
     );

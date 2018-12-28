@@ -25,6 +25,7 @@
 
   &-content {
     position: absolute;
+    display: flex;
     height: 100%;
     width: 100%;
 
@@ -34,10 +35,15 @@
       padding: 10px;
       font-size: 30px;
     }
+
+    &-link {
+      padding: 10px;
+    }
   }
 
   &-ingredients {
     padding: 10px;
+    flex: 1 0 auto;
 
     &-line {
       color: #fff;
