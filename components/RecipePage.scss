@@ -1,5 +1,9 @@
 .recipe {
+  position: relative;
+
   &-background {
+    position: absolute;
+
     &-container {
       display: flex;
       height: 100%;
@@ -18,5 +22,26 @@
       width: 100%;
     }
   }
-}
 
+  &-content {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    &-title {
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      font-size: 30px;
+    }
+  }
+
+  &-ingredients {
+    padding: 10px;
+
+    &-line {
+      color: #fff;
+      font-size: 17px;
+    }
+  }
+}
