@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, TextInput, View, Picker, Button } from 'react-native';
 
 import styles from './Search.scss';
+import FilterTags from './FilterTags';
 
 const dietLabels = {
   None: null,
@@ -36,6 +37,8 @@ const dietLabels = {
 
 export default class Search extends Component {
 
+  pickedItems = new Set();
+
   static navigationOptions = {
     title: 'Search'
   }
@@ -47,7 +50,7 @@ export default class Search extends Component {
 
     this.state = {
       searchValue: '',
-      pickedItem: null,
+      item: null
     }
   }
 
@@ -56,7 +59,8 @@ export default class Search extends Component {
   }
 
   onPickerChange(item) {
-    this.setState({ pickedItem: item });
+    this.setState({item: item});
+    this.pickedItems.add(item);
   }
 
   render() {
@@ -65,9 +69,10 @@ export default class Search extends Component {
         <View style={styles['search-input']}>
           <TextInput placeholder='Find a recipe' onChangeText={ (value) => this.onSearchChange(value) } />
           <Text style={styles['search-input-label']}>Pick label</Text>
+          <FilterTags items={ this.pickedItems } />
           <Picker
             onValueChange={ (item) => this.onPickerChange(item) }
-            selectedValue={ this.state.pickedItem }
+            selectedValue={ this.state.item }
           >
             {
               Object.keys(dietLabels).map(key => {
@@ -87,7 +92,7 @@ export default class Search extends Component {
             title='Search'
             onPress={() => this.props.navigation.navigate('recipeList', { 
               searchValue: this.state.searchValue,
-              dietLabel: this.state.pickedItem
+              dietLabel: this.state.pickedItems
             })}
           />
         </View>
