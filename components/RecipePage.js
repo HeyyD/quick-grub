@@ -13,7 +13,6 @@ export default class RecipePage extends Component {
   constructor(props) {
     super(props);
     this.data = this.props.navigation.state.params.data;
-    this.data = data;
   }
 
   render() {
