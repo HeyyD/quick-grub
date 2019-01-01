@@ -10,6 +10,9 @@ export default class RecipeList extends Component {
 
   constructor(props) {
     super(props);
+
+    this.onNavigate = this.onNavigate.bind(this);
+
     const searchProps = this.props.navigation.state.params;
 
     this.state = {
@@ -40,6 +43,10 @@ export default class RecipeList extends Component {
     });
   }
 
+  onNavigate(item) {
+    this.props.navigation.navigate('recipePage', { data: item });
+  }
+
   render() {
     return (
       <View>
@@ -53,7 +60,7 @@ export default class RecipeList extends Component {
         <FlatList 
           numColumns={3}
           data={this.state.recipes}
-          renderItem={({item}) => <RecipeButton data={item} /> }
+          renderItem={({item}) => <RecipeButton data={item} onPress={() => this.onNavigate(item)}/> }
           keyExtractor={(item, index) => index.toString()}
         >
         </FlatList>
