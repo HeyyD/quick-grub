@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import styles from './FilterTags.scss';
+import Tag from './Tag';
 
 export default class FilterTags extends Component {
 
@@ -17,7 +18,7 @@ export default class FilterTags extends Component {
       <View style={styles['tag-container']}>
         {
           Array.from(this.props.items).map((item, index) => {
-            return <Text key={ index }>{ item }</Text>;
+            return <Tag key={ index } text={ item } />
           })
         }
       </View>
