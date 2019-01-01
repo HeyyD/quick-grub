@@ -69,7 +69,6 @@ export default class Search extends Component {
         <View style={styles['search-input']}>
           <TextInput placeholder='Find a recipe' onChangeText={ (value) => this.onSearchChange(value) } />
           <Text style={styles['search-input-label']}>Pick label</Text>
-          <FilterTags items={ this.pickedItems } />
           <Picker
             onValueChange={ (item) => this.onPickerChange(item) }
             selectedValue={ this.state.item }
@@ -86,6 +85,7 @@ export default class Search extends Component {
               })
             }
           </Picker>
+          <FilterTags items={ this.pickedItems } />
         </View>
         <View style={styles['search-button-container']}>
           <Button

@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity} from 'react-native';
+import styles from './Tag.scss';
 
 export default class Tag extends Component {
   render() {
     return (
-      <Text>{ this.props.text }</Text>
+      <TouchableOpacity style={styles['tag-wrapper']}>
+        <Text style={styles['tag-wrapper-name']}>{ this.props.text }</Text>
+        <Text style={styles['tag-wrapper-cross']}>X</Text>
+      </TouchableOpacity>
     );
   }
 }
