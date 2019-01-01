@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 export default class FilterTags extends Component {
 
@@ -13,7 +13,13 @@ export default class FilterTags extends Component {
 
   render() {
     return (
-      <Text>TAGS</Text>
+      <View>
+        {
+          Array.from(this.props.items).map((item, index) => {
+            return <Text key={ index }>{ item }</Text>;
+          })
+        }
+      </View>
     );
   }
 }
