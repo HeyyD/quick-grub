@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, TextInput, View, Picker, Button } from 'react-native';
 
 import styles from './Search.scss';
+import FilterTags from './FilterTags';
 
 const dietLabels = {
   None: null,
@@ -36,6 +37,8 @@ const dietLabels = {
 
 export default class Search extends Component {
 
+  pickedItems = new Set();
+
   static navigationOptions = {
     title: 'Search'
   }
@@ -44,10 +47,12 @@ export default class Search extends Component {
     super(props);
     this.onPickerChange = this.onPickerChange.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
+    this.onRemoveTag = this.onRemoveTag.bind(this);
 
     this.state = {
       searchValue: '',
-      pickedItem: null,
+      item: null,
+      items: []
     }
   }
 
@@ -56,7 +61,20 @@ export default class Search extends Component {
   }
 
   onPickerChange(item) {
-    this.setState({ pickedItem: item });
+    this.pickedItems.add(item);
+
+    this.setState({
+      item: item,
+      items: [...this.pickedItems]
+    });
+  }
+
+  onRemoveTag(tag) {
+    this.pickedItems.delete(tag);
+
+    this.setState({
+      items: [...this.pickedItems]
+    });
   }
 
   render() {
@@ -64,10 +82,10 @@ export default class Search extends Component {
       <View style={styles['search']}>
         <View style={styles['search-input']}>
           <TextInput placeholder='Find a recipe' onChangeText={ (value) => this.onSearchChange(value) } />
-          <Text style={styles['search-input-label']}>Pick label</Text>
+          <Text style={styles['search-input-label']}>Pick labels</Text>
           <Picker
             onValueChange={ (item) => this.onPickerChange(item) }
-            selectedValue={ this.state.pickedItem }
+            selectedValue={ this.state.item }
           >
             {
               Object.keys(dietLabels).map(key => {
@@ -81,13 +99,14 @@ export default class Search extends Component {
               })
             }
           </Picker>
+          <FilterTags items={ this.state.items } onPress={this.onRemoveTag} />
         </View>
         <View style={styles['search-button-container']}>
           <Button
             title='Search'
             onPress={() => this.props.navigation.navigate('recipeList', { 
               searchValue: this.state.searchValue,
-              dietLabel: this.state.pickedItem
+              labels: this.state.items
             })}
           />
         </View>
