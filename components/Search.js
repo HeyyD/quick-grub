@@ -106,7 +106,7 @@ export default class Search extends Component {
             title='Search'
             onPress={() => this.props.navigation.navigate('recipeList', { 
               searchValue: this.state.searchValue,
-              dietLabel: this.state.pickedItems
+              labels: this.state.items
             })}
           />
         </View>
