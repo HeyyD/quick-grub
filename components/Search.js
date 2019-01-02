@@ -47,10 +47,12 @@ export default class Search extends Component {
     super(props);
     this.onPickerChange = this.onPickerChange.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
+    this.onRemoveTag = this.onRemoveTag.bind(this);
 
     this.state = {
       searchValue: '',
-      item: null
+      item: null,
+      items: []
     }
   }
 
@@ -59,8 +61,20 @@ export default class Search extends Component {
   }
 
   onPickerChange(item) {
-    this.setState({item: item});
     this.pickedItems.add(item);
+
+    this.setState({
+      item: item,
+      items: [...this.pickedItems]
+    });
+  }
+
+  onRemoveTag(tag) {
+    this.pickedItems.delete(tag);
+
+    this.setState({
+      items: [...this.pickedItems]
+    });
   }
 
   render() {
@@ -68,7 +82,7 @@ export default class Search extends Component {
       <View style={styles['search']}>
         <View style={styles['search-input']}>
           <TextInput placeholder='Find a recipe' onChangeText={ (value) => this.onSearchChange(value) } />
-          <Text style={styles['search-input-label']}>Pick label</Text>
+          <Text style={styles['search-input-label']}>Pick labels</Text>
           <Picker
             onValueChange={ (item) => this.onPickerChange(item) }
             selectedValue={ this.state.item }
@@ -85,7 +99,7 @@ export default class Search extends Component {
               })
             }
           </Picker>
-          <FilterTags items={ this.pickedItems } />
+          <FilterTags items={ this.state.items } onPress={this.onRemoveTag} />
         </View>
         <View style={styles['search-button-container']}>
           <Button
