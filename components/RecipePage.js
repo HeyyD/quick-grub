@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, Image, View, Button, Linking, AsyncStorage, FlatList } from 'react-native';
+import { Text, Image, View, Button, Linking, AsyncStorage, FlatList, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './RecipePage.scss';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class RecipePage extends Component {
 
@@ -37,7 +38,12 @@ class RecipePage extends Component {
           <View style={styles['recipe-background-overlay']}></View>
         </View>
         <View style={styles['recipe-content']}>
-          <Text style={styles['recipe-content-title']}>{this.data.label}</Text>
+          <View style={styles['recipe-content-header']}>
+            <Text style={styles['recipe-content-title']}>{this.data.label}</Text>
+            <TouchableOpacity style={styles['recipe-content-favorite']}>
+              <Icon style={styles['recipe-content-favorite-icon']} color='gray' name='heart' size={40} />
+            </TouchableOpacity>
+          </View>
           <FlatList
             style={styles['recipe-ingredients']}
             data={ this.data.ingredientLines }
