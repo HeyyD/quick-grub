@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Image } from 'react-native';
+import { Provider } from 'react-redux';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import RecipeList from './components/RecipeList';
 import Search from './components/Search';
 import RecipePage from './components/RecipePage';
 import Favorites from './components/Favorites';
+import store from './redux/favoritesReducer';
 
 const stackNavigation = createStackNavigator({
   search: { screen: Search },
@@ -27,6 +29,14 @@ const bottomNavigation = createBottomTabNavigator({
   }
 });
 
-const App = createAppContainer(bottomNavigation);
+const AppContainer = createAppContainer(bottomNavigation);
 
-export default App;
+export default class App extends Component {
+  render() {
+    return(
+      <Provider store={ store } >
+        <AppContainer />
+      </Provider>
+    );
+  }
+};

@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
-import store from '../redux/favoritesReducer';
+import { Text, View, Button } from 'react-native';
+import { connect } from 'react-redux';
 
-
-export default class Favorites extends Component {
-
-  componentDidMount() {
-    console.log(store.getState());
-  }
-
+class Favorites extends Component {
   render() {
     return(
-      <Text>FAVORITES WORK</Text>
+      <View>
+        <Text>FAVORITES WORKING</Text>
+      </View>
     );
   }
 }
+
+export default connect()(Favorites);
