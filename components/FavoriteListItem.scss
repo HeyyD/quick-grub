@@ -1,0 +1,26 @@
+.list-item {
+  &-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 0;
+  }
+
+  &-label {
+    flex: 1 0 auto;
+    font-size: 17px;
+    padding-left: 10px;
+    font-weight: 700;
+  }
+
+  &-menu {
+    align-self: flex-end;
+    height: 25px;
+    width: 25px;
+    margin: 5px;
+
+    &-icon {
+      margin: auto;
+    }
+  }
+}
