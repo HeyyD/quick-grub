@@ -3,13 +3,31 @@ import { Text, View, Button } from 'react-native';
 import { connect } from 'react-redux';
 
 class Favorites extends Component {
+
   render() {
     return(
       <View>
-        <Text>FAVORITES WORKING</Text>
+        <Text>{this.props.favorites}</Text>
+        <Button title='ASD' onPress={this.props.addFavorite}/>
       </View>
     );
   }
 }
 
-export default connect()(Favorites);
+const mapStateToProps = state => {
+  return {
+    favorites: state
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addFavorite: () => {
+      dispatch({
+        type: 'ADD_FAVORITE'
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
