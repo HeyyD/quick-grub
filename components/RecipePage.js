@@ -17,16 +17,25 @@ class RecipePage extends Component {
 
     this.data = this.props.navigation.state.params.data;
 
-    this.saveFavorite = this.saveFavorite.bind(this);
+    this.saveFavorites = this.saveFavorites.bind(this);
+    this.toggleFavorite = this.toggleFavorite.bind(this)
   }
 
   componentDidUpdate(prevProps) {
     if(prevProps.favorites !== this.props.favorites) {
-      this.saveFavorite();
+      this.saveFavorites();
     }
   }
 
-  async saveFavorite() {
+  toggleFavorite() {
+    if (this.props.favorites.includes(this.data)) {
+      this.props.removeFavorite(this.data);
+    } else {
+      this.props.addFavorite(this.data);
+    }
+  }
+
+  async saveFavorites() {
     await AsyncStorage.setItem('FAVORITES', JSON.stringify(this.props.favorites));
   }
 
@@ -40,10 +49,12 @@ class RecipePage extends Component {
         <View style={styles['recipe-content']}>
           <View style={styles['recipe-content-header']}>
             <Text style={styles['recipe-content-title']}>{this.data.label}</Text>
-            <TouchableOpacity style={styles['recipe-content-favorite']}>
+            <TouchableOpacity 
+              style={styles['recipe-content-favorite']}
+              onPress={ () => this.toggleFavorite() }
+            >
               <Icon 
                 style={styles['recipe-content-favorite-icon']}
-                // color='gray'
                 color={ this.props.favorites.includes(this.data) ? '#b3002d' : 'gray' }
                 name='heart'
                 size={40} />
@@ -75,6 +86,12 @@ const mapDispatchToProps = dispatch => {
     addFavorite: (data) => {
       dispatch({
         type: 'ADD_FAVORITE',
+        data: data
+      })
+    },
+    removeFavorite: (data) => {
+      dispatch({
+        type: 'REMOVE_FAVORITE',
         data: data
       })
     }
