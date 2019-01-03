@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
 class Favorites extends Component {
 
+  componentDidUpdate() {
+    console.log(this.props.favorites)
+  }
+
   render() {
     return(
-      <View>
-        <Text>{this.props.favorites}</Text>
-        <Button title='ASD' onPress={this.props.addFavorite}/>
-      </View>
+      <FlatList
+        data={ this.props.favorites }
+        renderItem={ ({item}) => <Text>{item.label}</Text> }
+        keyExtractor={ (item, index) => index.toString() }
+      />
     );
   }
 }
@@ -20,14 +25,4 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addFavorite: () => {
-      dispatch({
-        type: 'ADD_FAVORITE'
-      })
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
+export default connect(mapStateToProps)(Favorites);

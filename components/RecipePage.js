@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Text, Image, View, Button, Linking } from 'react-native';
+import { connect } from 'react-redux';
 import styles from './RecipePage.scss';
 
-export default class RecipePage extends Component {
+class RecipePage extends Component {
 
   data;
 
@@ -30,6 +31,7 @@ export default class RecipePage extends Component {
                 return <Text style={styles['recipe-ingredients-line']} key={index}>- {line}</Text>;
               })
             }
+            <Button title="add to favorites" onPress={() => this.props.addFavorite(this.data)} />
           </View>
           <View style={styles['recipe-content-link']}>
             <Button title='Go to recipe' onPress={() => Linking.openURL(this.data.url)} />
@@ -39,3 +41,16 @@ export default class RecipePage extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addFavorite: (data) => {
+      dispatch({
+        type: 'ADD_FAVORITE',
+        data: data
+      })
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(RecipePage);
