@@ -13,6 +13,7 @@ class Favorites extends Component {
     super(props);
     this.onNavigate = this.onNavigate.bind(this);
     this.onMenu = this.onMenu.bind(this);
+    this.removeFavorite = this.removeFavorite.bind(this);
   }
 
   onNavigate(item) {
@@ -24,11 +25,15 @@ class Favorites extends Component {
       'Remove favorite?',
       `Are you sure you want remove ${item.label}?`,
       [
-        {text: 'Yes', onPress: () => console.log('YES')},
+        {text: 'Yes', onPress: () => this.removeFavorite(item)},
         {text: 'No', onPress: () => console.log('Canceled')},
       ],
       { cancelable: true }
     )
+  }
+
+  removeFavorite(item) {
+    this.props.removeFavorite(item);
   }
 
   render() {
@@ -48,4 +53,15 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Favorites);
+const mapDispatchToProps = dispatch => {
+  return {
+    removeFavorite: (data) => {
+      dispatch({
+        type: 'REMOVE_FAVORITE',
+        data: data
+      });
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

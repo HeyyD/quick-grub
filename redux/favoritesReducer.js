@@ -7,6 +7,9 @@ const reducer = (state = [], action) => {
       return state;
     case 'ADD_FAVORITE':
       return [...state, action.data]
+    case 'REMOVE_FAVORITE':
+      state.splice(state.indexOf(action.data), 1);
+      return [...state];
     default: 
       return state;
   }
