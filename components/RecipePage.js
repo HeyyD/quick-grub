@@ -41,7 +41,12 @@ class RecipePage extends Component {
           <View style={styles['recipe-content-header']}>
             <Text style={styles['recipe-content-title']}>{this.data.label}</Text>
             <TouchableOpacity style={styles['recipe-content-favorite']}>
-              <Icon style={styles['recipe-content-favorite-icon']} color='gray' name='heart' size={40} />
+              <Icon 
+                style={styles['recipe-content-favorite-icon']}
+                // color='gray'
+                color={ this.props.favorites.includes(this.data) ? '#b3002d' : 'gray' }
+                name='heart'
+                size={40} />
             </TouchableOpacity>
           </View>
           <FlatList
