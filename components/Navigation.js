@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Image, AsyncStorage } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import RecipeList from './RecipeList';
 import Search from './Search';
 import RecipePage from './RecipePage';
@@ -18,13 +20,13 @@ const bottomNavigation = createBottomTabNavigator({
   Search: {
     screen: stackNavigation,
     navigationOptions: {
-      tabBarIcon: <Image style={{width: 25, height: 25}} source={ require('../assets/search-icon-png-21.png') } />
+      tabBarIcon: <Icon color='gray' name='search' size={25} />
     }
   },
   Favorites: {
     screen: Favorites,
     navigationOptions: {
-      tabBarIcon: <Image style={{width: 25, height: 25}} source={ require('../assets/icon-heart-rate.png') } />
+      tabBarIcon: <Icon color='gray' name='heart' size={25} />
     }
   }
 });
