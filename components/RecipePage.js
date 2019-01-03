@@ -27,7 +27,6 @@ class RecipePage extends Component {
 
   async saveFavorite() {
     await AsyncStorage.setItem('FAVORITES', JSON.stringify(this.props.favorites));
-    console.log('FAVORITE SAVED');
   }
 
   render() {

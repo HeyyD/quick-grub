@@ -3,11 +3,6 @@ import { Text, View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
 class Favorites extends Component {
-
-  componentDidUpdate() {
-    console.log(this.props.favorites)
-  }
-
   render() {
     return(
       <FlatList

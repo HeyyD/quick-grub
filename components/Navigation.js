@@ -35,11 +35,11 @@ const AppContainer = createAppContainer(bottomNavigation);
 class Navigation extends Component {
 
   async componentDidMount() {
-    const data = await AsyncStorage.getItem('FAVORITES');
+    let data = await AsyncStorage.getItem('FAVORITES');
     if (data) {
-      this.props.init(data);
+      data = JSON.parse(data);
+      this.props.init(data)
     }
-    console.log(data);
   }
 
   render() {

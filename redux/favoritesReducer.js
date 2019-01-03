@@ -3,7 +3,7 @@ import { createStore } from 'redux';
 const reducer = (state = [], action) => {
   switch(action.type) {
     case 'INIT':
-      console.log('REDUCER IS INITING');
+      state = action.data;
       return state;
     case 'ADD_FAVORITE':
       return [...state, action.data]
