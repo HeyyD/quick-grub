@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Image, View, Button, Linking, AsyncStorage } from 'react-native';
+import { Text, Image, View, Button, Linking, AsyncStorage, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './RecipePage.scss';
 
@@ -38,14 +38,12 @@ class RecipePage extends Component {
         </View>
         <View style={styles['recipe-content']}>
           <Text style={styles['recipe-content-title']}>{this.data.label}</Text>
-          <View style={styles['recipe-ingredients']}>
-            {
-              this.data.ingredientLines.map((line, index) => {
-                return <Text style={styles['recipe-ingredients-line']} key={index}>- {line}</Text>;
-              })
-            }
-            <Button title="add to favorites" onPress={() => this.props.addFavorite(this.data)} />
-          </View>
+          <FlatList
+            style={styles['recipe-ingredients']}
+            data={ this.data.ingredientLines }
+            renderItem={ ({item}) => <Text style={styles['recipe-ingredients-line']}>- { item }</Text> }
+            keyExtractor={ (item, index) => index.toString() }
+          />
           <View style={styles['recipe-content-link']}>
             <Button title='Go to recipe' onPress={() => Linking.openURL(this.data.url)} />
           </View>
