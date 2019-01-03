@@ -4,6 +4,11 @@ import { connect } from 'react-redux';
 import FavoriteListItem from './FavoriteListItem';
 
 class Favorites extends Component {
+
+  static navigationOptions = {
+    title: 'Favorites'
+  }
+
   render() {
     return(
       <FlatList

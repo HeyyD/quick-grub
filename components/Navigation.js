@@ -10,21 +10,26 @@ import Search from './Search';
 import RecipePage from './RecipePage';
 import Favorites from './Favorites';
 
-const stackNavigation = createStackNavigator({
+const searchStack = createStackNavigator({
   search: { screen: Search },
   recipeList: { screen: RecipeList },
   recipePage: { screen: RecipePage }
 });
 
+const favoritesStack = createStackNavigator({
+  favorites: { screen: Favorites },
+  recipePage: { screen: RecipePage }
+});
+
 const bottomNavigation = createBottomTabNavigator({
   Search: {
-    screen: stackNavigation,
+    screen: searchStack,
     navigationOptions: {
       tabBarIcon: <Icon color='gray' name='search' size={25} />
     }
   },
   Favorites: {
-    screen: Favorites,
+    screen: favoritesStack,
     navigationOptions: {
       tabBarIcon: <Icon color='gray' name='heart' size={25} />
     }
