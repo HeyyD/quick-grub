@@ -6,7 +6,6 @@ const reducer = (state = [], action) => {
       console.log('REDUCER IS INITING');
       return state;
     case 'ADD_FAVORITE':
-      console.log(state);
       return [...state, action.data]
     default: 
       return state;

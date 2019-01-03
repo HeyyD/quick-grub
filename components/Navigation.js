@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Image } from 'react-native';
+import { Image, AsyncStorage } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 import RecipeList from './RecipeList';
@@ -34,8 +34,12 @@ const AppContainer = createAppContainer(bottomNavigation);
 
 class Navigation extends Component {
 
-  componentDidMount() {
-    this.props.init();
+  async componentDidMount() {
+    const data = await AsyncStorage.getItem('FAVORITES');
+    if (data) {
+      this.props.init(data);
+    }
+    console.log(data);
   }
 
   render() {
@@ -47,9 +51,10 @@ class Navigation extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    init: () => {
+    init: (data) => {
       dispatch({
-        type: 'INIT'
+        type: 'INIT',
+        data: data
       })
     }
   }

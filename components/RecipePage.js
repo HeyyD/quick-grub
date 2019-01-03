@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Image, View, Button, Linking } from 'react-native';
+import { Text, Image, View, Button, Linking, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './RecipePage.scss';
 
@@ -13,7 +13,21 @@ class RecipePage extends Component {
 
   constructor(props) {
     super(props);
+
     this.data = this.props.navigation.state.params.data;
+
+    this.saveFavorite = this.saveFavorite.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.favorites !== this.props.favorites) {
+      this.saveFavorite();
+    }
+  }
+
+  async saveFavorite() {
+    await AsyncStorage.setItem('FAVORITES', JSON.stringify(this.props.favorites));
+    console.log('FAVORITE SAVED');
   }
 
   render() {
@@ -42,6 +56,12 @@ class RecipePage extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    favorites: state
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     addFavorite: (data) => {
@@ -53,4 +73,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(RecipePage);
+export default connect(mapStateToProps, mapDispatchToProps)(RecipePage);
