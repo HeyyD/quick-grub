@@ -9,11 +9,20 @@ class Favorites extends Component {
     title: 'Favorites'
   }
 
+  constructor(props) {
+    super(props);
+    this.navigate = this.navigate.bind(this);
+  }
+
+  navigate(item) {
+    this.props.navigation.navigate('recipePage', { data: item });
+  }
+
   render() {
     return(
       <FlatList
         data={ this.props.favorites }
-        renderItem={ ({item}) => <FavoriteListItem data={item} /> }
+        renderItem={ ({item}) => <FavoriteListItem data={ item } onPress={ () => this.navigate(item) } /> }
         keyExtractor={ (item, index) => index.toString() }
       />
     );
