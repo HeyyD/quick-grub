@@ -12,7 +12,7 @@ export default class FavoriteListItem extends Component {
         <TouchableOpacity style={ styles['list-item-label'] } onPress={ this.props.onPress }>
           <Text style={ styles['list-item-label-text'] }>{ this.props.data.label }</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={ styles['list-item-menu'] }>
+        <TouchableOpacity style={ styles['list-item-menu'] } onPress={ this.props.onMenu }>
           <Icon style={ styles['list-item-menu-icon'] } color='gray' name='ellipsis-v' size={25} />
         </TouchableOpacity>
       </View>

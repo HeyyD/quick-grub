@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { FlatList, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import FavoriteListItem from './FavoriteListItem';
 
@@ -11,18 +11,31 @@ class Favorites extends Component {
 
   constructor(props) {
     super(props);
-    this.navigate = this.navigate.bind(this);
+    this.onNavigate = this.onNavigate.bind(this);
+    this.onMenu = this.onMenu.bind(this);
   }
 
-  navigate(item) {
+  onNavigate(item) {
     this.props.navigation.navigate('recipePage', { data: item });
+  }
+
+  onMenu(item) {
+    Alert.alert(
+      'Remove favorite?',
+      `Are you sure you want remove ${item.label}?`,
+      [
+        {text: 'Yes', onPress: () => console.log('YES')},
+        {text: 'No', onPress: () => console.log('Canceled')},
+      ],
+      { cancelable: true }
+    )
   }
 
   render() {
     return(
       <FlatList
         data={ this.props.favorites }
-        renderItem={ ({item}) => <FavoriteListItem data={ item } onPress={ () => this.navigate(item) } /> }
+        renderItem={ ({item}) => <FavoriteListItem data={ item } onPress={ () => this.onNavigate(item) }onMenu={ () => this.onMenu(item) } /> }
         keyExtractor={ (item, index) => index.toString() }
       />
     );
