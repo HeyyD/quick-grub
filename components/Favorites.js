@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, Alert } from 'react-native';
+import { FlatList, Alert, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import FavoriteListItem from './FavoriteListItem';
 
@@ -25,22 +25,28 @@ class Favorites extends Component {
       'Remove favorite?',
       `Are you sure you want remove ${item.label}?`,
       [
-        {text: 'Yes', onPress: () => this.removeFavorite(item)},
+        {text: 'Yes', onPress: () => this.props.removeFavorite(item)},
         {text: 'No', onPress: () => console.log('Canceled')},
       ],
       { cancelable: true }
     )
   }
 
-  removeFavorite(item) {
-    this.props.removeFavorite(item);
+  async removeFavorite() {
+    await AsyncStorage.setItem('FAVORITES', JSON.stringify(this.props.favorites));
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.favorites !== this.props.favorites) {
+      this.removeFavorite();
+    }
   }
 
   render() {
     return(
       <FlatList
         data={ this.props.favorites }
-        renderItem={ ({item}) => <FavoriteListItem data={ item } onPress={ () => this.onNavigate(item) }onMenu={ () => this.onMenu(item) } /> }
+        renderItem={ ({item}) => <FavoriteListItem data={ item } onPress={ () => this.onNavigate(item) } onMenu={ () => this.onMenu(item) } /> }
         keyExtractor={ (item, index) => index.toString() }
       />
     );
