@@ -6,7 +6,7 @@ import styles from './Search.scss';
 import FilterTags from './FilterTags';
 
 const dietLabels = {
-  None: null,
+  Choose_labels: null,
   Alcohol_free: 'alcohol-free',
   Celery_free: 'celery-free',
   Crustacean_free: 'crustacean-free',
@@ -94,7 +94,6 @@ export default class Search extends Component {
               <Icon color='gray' name='search' size={20} />
             </TouchableOpacity>
           </View>
-          <Text style={styles['search-input-label']}>Pick labels</Text>
           <Picker
             onValueChange={ (item) => this.onPickerChange(item) }
             selectedValue={ this.state.item }

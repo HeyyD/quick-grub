@@ -9,15 +9,18 @@
     &-container {
       display: flex;
       flex-direction: row;
+      background: #dadada;
 
       &-textinput {
         flex: 1 0 auto;
         font-size: 15px;
+        background: #ebebeb;
+        border: solid 1px #dadada;
       }
 
       &-button {
         align-self: center;
-        padding: 0 10px;
+        padding: 0 20px;
       }
     }
 
