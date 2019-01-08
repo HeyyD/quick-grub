@@ -6,6 +6,24 @@
     margin: 10px;
     flex: 1 0 auto;
 
+    &-container {
+      display: flex;
+      flex-direction: row;
+      background: #dadada;
+
+      &-textinput {
+        flex: 1 0 auto;
+        font-size: 15px;
+        background: #ebebeb;
+        border: solid 1px #dadada;
+      }
+
+      &-button {
+        align-self: center;
+        padding: 0 20px;
+      }
+    }
+
     &-label {
       padding-left: 10px;
     }

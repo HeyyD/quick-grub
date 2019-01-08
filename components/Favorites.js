@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { FlatList, Alert, AsyncStorage } from 'react-native';
+import { FlatList, Alert, AsyncStorage, Text } from 'react-native';
 import { connect } from 'react-redux';
 import FavoriteListItem from './FavoriteListItem';
+
+import styles from './Favorites.scss';
 
 class Favorites extends Component {
 
@@ -43,13 +45,17 @@ class Favorites extends Component {
   }
 
   render() {
-    return(
-      <FlatList
-        data={ this.props.favorites }
-        renderItem={ ({item}) => <FavoriteListItem data={ item } onPress={ () => this.onNavigate(item) } onMenu={ () => this.onMenu(item) } /> }
-        keyExtractor={ (item, index) => index.toString() }
-      />
-    );
+    if(this.props.favorites.length < 1) {
+      return <Text style={ styles['no-favorites-title'] }>You don't have any favorites yet</Text>
+    } else {
+      return(
+        <FlatList
+          data={ this.props.favorites }
+          renderItem={ ({item}) => <FavoriteListItem data={ item } onPress={ () => this.onNavigate(item) } onMenu={ () => this.onMenu(item) } /> }
+          keyExtractor={ (item, index) => index.toString() }
+        />
+      );
+    }
   }
 }
 

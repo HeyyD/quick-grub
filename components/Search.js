@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Text, TextInput, View, Picker, Button } from 'react-native';
+import { Text, TextInput, View, Picker, Button, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import styles from './Search.scss';
 import FilterTags from './FilterTags';
 
 const dietLabels = {
-  None: null,
+  Choose_labels: null,
   Alcohol_free: 'alcohol-free',
   Celery_free: 'celery-free',
   Crustacean_free: 'crustacean-free',
@@ -81,8 +82,18 @@ export default class Search extends Component {
     return(
       <View style={styles['search']}>
         <View style={styles['search-input']}>
-          <TextInput placeholder='Find a recipe' onChangeText={ (value) => this.onSearchChange(value) } />
-          <Text style={styles['search-input-label']}>Pick labels</Text>
+          <View style={ styles['search-input-container'] }>
+            <TextInput style={ styles['search-input-container-textinput'] } placeholder='Find a recipe' onChangeText={ (value) => this.onSearchChange(value) } />
+            <TouchableOpacity 
+              style={ styles['search-input-container-button'] }
+              onPress={() => this.props.navigation.navigate('recipeList', { 
+                searchValue: this.state.searchValue,
+                labels: this.state.items
+              })}
+            >
+              <Icon color='gray' name='search' size={20} />
+            </TouchableOpacity>
+          </View>
           <Picker
             onValueChange={ (item) => this.onPickerChange(item) }
             selectedValue={ this.state.item }
