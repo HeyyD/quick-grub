@@ -1,14 +1,15 @@
-import{ createStackNavigator, createAppContainer } from 'react-navigation';
-import RecipeList from './components/RecipeList';
-import Search from './components/Search';
-import RecipePage from './components/RecipePage';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
 
-const stackNavigation = createStackNavigator({
-  search: { screen: Search },
-  recipeList: { screen: RecipeList },
-  recipePage: { screen: RecipePage }
-});
+import Navigation from './components/Navigation'
+import store from './redux/favoritesReducer';
 
-const App = createAppContainer(stackNavigation);
-
-export default App;
+export default class App extends Component {
+  render() {
+    return(
+      <Provider store={ store } >
+        <Navigation />
+      </Provider>
+    );
+  }
+};
