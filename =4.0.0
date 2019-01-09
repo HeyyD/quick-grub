@@ -1,0 +1,14 @@
+
+> node-sass@4.10.0 install /home/heidi/projects/mobile-2/QuickGrub/node_modules/node-sass
+> node scripts/install.js
+
+Cached binary found at /home/heidi/.npm/node-sass/4.10.0/linux-x64-64_binding.node
+
+> node-sass@4.10.0 postinstall /home/heidi/projects/mobile-2/QuickGrub/node_modules/node-sass
+> node scripts/build.js
+
+Binary found at /home/heidi/projects/mobile-2/QuickGrub/node_modules/node-sass/vendor/linux-x64-64/binding.node
+Testing binary
+Binary is fine
++ node-sass@4.10.0
+added 67 packages from 61 contributors in 11.433s
